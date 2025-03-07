@@ -10,10 +10,19 @@ const container = document.getElementById("character-container");
 const btnPrev = document.getElementById("prev");
 const btnNext = document.getElementById("next");
 
+document.addEventListener("DOMContentLoaded", () => {
+    const hoverSound = document.getElementById("hoverSound");
+    hoverSound.volume = 0.3;
+    getCharacters();
+    document.getElementById('name').addEventListener('input', updateFilters);
+    document.getElementById('species').addEventListener('change', updateFilters);
+    document.getElementById('gender').addEventListener('change', updateFilters);
+    document.getElementById('status').addEventListener('change', updateFilters);
+});
+
 async function getCharacters() {
     try {
         container.innerHTML = "Carregando...";
-
         const url = new URL('https://rickandmortyapi.com/api/character');
         url.searchParams.append('page', currentPage);
 
@@ -26,8 +35,6 @@ async function getCharacters() {
         const response = await fetch(url);
         const data = await response.json();
         container.innerHTML = "";
-
-        // Obtém o elemento de áudio apenas uma vez
         const sound = document.getElementById("hoverSound");
 
         data.results.forEach(character => {
@@ -37,13 +44,8 @@ async function getCharacters() {
                 <img src="${character.image}" alt="${character.name}">
                 <p>${character.name}</p>
             `;
-
-            // Adiciona o efeito sonoro ao passar o mouse sobre o card
-            card.addEventListener("mouseover", function() {
-                sound.play(); // Toca o som ao passar o mouse
-            });
-
-            // Adiciona o evento de clique para a página de detalhes
+            
+            card.addEventListener("mouseover", () => sound.play());
             card.addEventListener("click", () => {
                 window.location.href = `./pages/detalhes.html?id=${character.id}`;
             });
@@ -51,7 +53,6 @@ async function getCharacters() {
             container.appendChild(card);
         });
 
-        // Desabilita os botões de navegação quando não houver mais páginas
         btnPrev.disabled = !data.info.prev;
         btnNext.disabled = !data.info.next;
     } catch (error) {
@@ -65,7 +66,6 @@ function updateFilters() {
     filters.species = document.getElementById('species').value;
     filters.gender = document.getElementById('gender').value;
     filters.status = document.getElementById('status').value;
-
     currentPage = 1;
     getCharacters();
 }
@@ -80,13 +80,4 @@ btnPrev.addEventListener("click", () => {
 btnNext.addEventListener("click", () => {
     currentPage++;
     getCharacters();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    getCharacters();
-    // Adiciona os event listeners nos filtros
-    document.getElementById('name').addEventListener('input', updateFilters);
-    document.getElementById('species').addEventListener('change', updateFilters);
-    document.getElementById('gender').addEventListener('change', updateFilters);
-    document.getElementById('status').addEventListener('change', updateFilters);
 });
