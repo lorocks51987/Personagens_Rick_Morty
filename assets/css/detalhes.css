@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    background-color: #000; /* Preto absoluto */
+    color: white;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Título Principal */
+h1 {
+    font-size: 50px;
+    text-transform: uppercase;
+    color: #00ff00;
+    text-shadow: 
+        -3px -3px 0 #000,  
+        3px -3px 0 #000,  
+        -3px 3px 0 #000,  
+        3px 3px 0 #000,  
+        0 0 20px #00ff00;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background-color: #000;
+    border: 3px solid #00ff00;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 15px #00ff00;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    max-width: 400px;
+    width: 90%;
+}
+
+.card img {
+    width: 110%;
+    max-width: 550px;
+    border-radius: 10px;
+}
+
+.card p {
+    font-size: 18px;
+    font-weight: normal;
+    margin: 10px 0;
+    text-align: justify;
+}
+
+.button {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #00ff00;
+    background: #000;
+    border: 3px solid #00ff00;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.button:hover {
+    color: #000;
+    background: #00ff00;
+    box-shadow: 0 0 15px #00ff00;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}

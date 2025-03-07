@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <title>Personagens Rick e Morty</title>
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <h1>Personagens Rick e Morty</h1>
+    <div class="filters">
+        <input type="text" id="name" placeholder="Filtrar por nome..." class="filter" aria-label="Filtrar por nome">
+
+        <label for="species">Espécie:</label>
+        <select name="species" id="species" class="filter" aria-label="Filtrar por espécie">
+            <option value="">Todas</option>
+            <option value="animal">Animal</option>
+            <option value="alien">Alien</option>
+            <option value="disease">Doença</option>
+            <option value="unknown">Desconhecido</option>
+            <option value="human">Humano</option>
+            <option value="humanoid">Humanoide</option>
+            <option value="mythological">Mitológico</option>
+            <option value="poopybutthole">Poopybutthole</option>
+            <option value="robot">Robô</option>
+        </select>
+
+        <label for="gender">Gênero:</label>
+        <select name="gender" id="gender" class="filter" aria-label="Filtrar por gênero">
+            <option value="">Todos</option>
+            <option value="female">Feminino</option>
+            <option value="male">Masculino</option>
+            <option value="genderless">Sem Gênero</option>
+            <option value="unknown">Desconhecido</option>
+        </select>
+
+        <label for="status">Status:</label>
+        <select name="status" id="status" class="filter" aria-label="Filtrar por status">
+            <option value="">Todos</option>
+            <option value="alive">Vivo</option>
+            <option value="dead">Morto</option>
+            <option value="unknown">Desconhecido</option>
+        </select>
+    </div>
+    <div class="container" id="character-container">
+    </div>
+    <div class="pagination">
+        <button id="prev" class="btn" type="button">Previous</button>
+        <button id="next" class="btn" type="button">Next</button>
+    </div>
+
+    <audio id="hoverSound" src="./assets/img/portal.mp3" preload="auto"></audio>
+
+
+    <script src="./assets/js/Scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Personagem</title>
+    <link rel="stylesheet" href="../assets/css/detalhes.css">
+    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <h1 id="character-name">Carregando...</h1>
+    <div id="character-details"></div>
+
+    <div class="pagination">        
+        <button class="button" id="anterior" class="btn" type="button">Anterior</button>
+        <button class="button" onclick="window.location.href = '../index.html'">Home</button>
+        <button class="button" id="proximo" class="btn" type="button">Próximo</button>
+    </div>
+
+    <script>
+        const btnProx = document.getElementById("proximo");
+        const btnAnt = document.getElementById("anterior");
+        let params = new URLSearchParams(window.location.search);
+        let characterId = parseInt(params.get("id"));
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+        }
+
+        async function loadCharacterDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const characterId = params.get("id");
+
+            if (!characterId) {
+                document.getElementById("character-details").innerHTML = "Personagem não encontrado.";
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://rickandmortyapi.com/api/character/${characterId}`);
+                const character = await response.json();
+
+                document.getElementById("character-name").textContent = character.name;
+
+                document.getElementById("character-details").innerHTML = `
+                    <img src="${character.image}" alt="${character.name}">
+                    <p><strong>Nome:</strong> ${character.name}</p>
+                    <p><strong>Espécie:</strong> ${character.species}</p>
+                    <p><strong>Gênero:</strong> ${character.gender}</p>
+                    <p><strong>Status:</strong> ${character.status}</p>
+                    <p><strong>Origem:</strong> ${character.origin.name}</p>
+                    <p><strong>Localização Atual:</strong> ${character.location.name}</p>
+                    <p><strong>Dimensão:</strong> ${character.dimension || 'Não disponível'}</p>
+                    <p><strong>Data de Criação:</strong> ${formatDate(character.created)}</p>
+                    <p><strong>Quantidade de Episódios:</strong> ${character.episode.length}</p>
+                `;
+            } catch (error) {
+                console.error("Erro ao carregar detalhes do personagem:", error);
+                document.getElementById("character-details").innerHTML = "Erro ao carregar personagem.";
+            }
+        }
+
+        btnProx.addEventListener("click", () => {
+            characterId++;
+            window.location.search = `id=${characterId}`;
+        });
+
+        btnAnt.addEventListener("click", () => {
+            if (characterId > 1) {
+                characterId--;
+                window.location.search = `id=${characterId}`;
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", loadCharacterDetails);
+    </script>
+</body>
+</html>
