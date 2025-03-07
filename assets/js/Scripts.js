@@ -12,7 +12,7 @@ const btnNext = document.getElementById("next");
 
 document.addEventListener("DOMContentLoaded", () => {
     const hoverSound = document.getElementById("hoverSound");
-    hoverSound.volume = 0.3;
+    hoverSound.volume = 0.2;
     getCharacters();
     document.getElementById('name').addEventListener('input', updateFilters);
     document.getElementById('species').addEventListener('change', updateFilters);
